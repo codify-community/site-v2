@@ -1,5 +1,0 @@
-pymongo
-dnspython
-python-dotenv
-requests
-flask_cors
