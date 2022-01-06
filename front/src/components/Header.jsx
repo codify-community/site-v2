@@ -55,6 +55,7 @@ const NavTxt = styled.p`
 
 const Header = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
+    console.log("changed scroll position:", scrollPosition);
     const [HeaderMode, setHeaderMode] = useState('header');
     const handleScroll = () => {
         const position = window.pageYOffset;
