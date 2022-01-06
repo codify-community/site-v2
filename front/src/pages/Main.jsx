@@ -19,7 +19,6 @@ import Card from '../components/Card'
 
 
 
-
 const MainBox = styled.div`
     display: flex;
     flex-direction: column;
@@ -211,15 +210,12 @@ const SliderSettings = {
 //area da staff (falta integrar com a api pra pegar os dados)
 const Staffs = (props) => {
     //staff arguments: foto, nome, descrição, cargo(MOD/ADM), habiliades (linguagens e frameworks), link (github ou site), type (github ou site)
-    const staffs = props.staff.map((user, index) =>
-        <Card key={index} pfp={user.pfp} name={user.name} ocupation={'➛ Ocupação'} desc={user.bio} role={user.role} habilities={user.habilidades} link={user.github} type={'github'}/>
-    )
     return( 
         <CardsBox>
             <TitleCards>Staffs</TitleCards>
             <CardBox>
                 <Slider {...SliderSettings}  className='carousel'>
-                    {staffs}
+                    {props.staffs}
                 </Slider >
             </CardBox>
         </CardsBox>
@@ -227,41 +223,57 @@ const Staffs = (props) => {
 }
 
 const Boosters = (props) => {
-    const boosters = props.booster.map((user, index) =>
-        <Card key={index} pfp={user.pfp} name={user.name} ocupation={'➛ Ocupação'} desc={user.bio} role={user.role} habilities={user.habilidades} link={user.github} type={'github'}/>
-    )
+
     return(
         <CardsBox>
             <TitleCards>Boosters</TitleCards>
             <CardBox>
                 <Slider {...SliderSettings}  className='carousel'>
-                    {boosters}      
+                    {props.boosters}      
                 </Slider >
             </CardBox>
         </CardsBox>
     )   
 }
 
-const Main = () => {
-    const [res, setRes] = useState({info:{'channel_count':'0'},staff:[], booster:[]})
-    const [loading, setLoading] = useState(true)
-    useEffect(() => {
-        if (loading) {
-            const getStaffs = async () => {
-                const response = await axios.get('http://localhost:5000/api/home');
-                return response.data;
-            }
-            getStaffs().then(res => setRes(res))
-            setLoading(false)
-        }
-    })
+const getData = async () => {
+    try{
+        const response = await axios.get('http://localhost:5000/api/home');
     
+        const boosters = response.data.booster.map((booster, index)=>
+            <Card key={index} pfp={booster.pfp} name={booster.name} ocupation={'➛ Ocupação'} desc={booster.bio} role={booster.role} habilities={booster.habilidades} link={booster.github} type={'github'}/>
+        )
+
+        const staffs = response.data.staff.map((staff, index)=>
+            <Card key={index} pfp={staff.pfp} name={staff.name} ocupation={'➛ Ocupação'} desc={staff.bio} role={staff.role} habilities={staff.habilidades} link={staff.github} type={'github'}/>
+        )
+    
+        const info = response.data.info;
+    
+        return {staffs,boosters,info};
+    }catch(err){
+        throw new Error(err);
+    }
+
+}
+
+const Main = () => {
+    const [data, setData] = useState({info:{},staffs:null, boosters:null});
+
+    useEffect(() => {
+        getData()
+            .then(res => setData(res))
+            .catch(error=> console.error(error))
+    },[data])
+    
+    const {staffs,boosters,info} = data;
+
     return (
         <MainBox>
             <Banner />
-            <Infos infos={res['info']}/>
-            <Staffs staff={res['staff']}/>
-            <Boosters booster={res['booster']}/>
+            <Infos infos={info}/>
+            <Staffs staff={staffs}/>
+            <Boosters booster={boosters}/>
         </MainBox>  
     );
 }

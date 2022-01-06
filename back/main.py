@@ -2,7 +2,6 @@ import flask
 from flask_cors import CORS
 from utils.dbconnect import mongoConnect
 
-
 cluster = mongoConnect()
 db = cluster["discord"]
 site = db["site"]

@@ -53,8 +53,6 @@ const NavTxt = styled.p`
     }
 `
 
-
-
 const Header = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [HeaderMode, setHeaderMode] = useState('header');
