@@ -2,3 +2,5 @@ pymongo
 dnspython
 python-dotenv
 requests
+flask
+flask-cors
