@@ -81,7 +81,7 @@ const Header = () => {
         <HeaderStyled className={HeaderMode}>
             <Link to="/" style={{textDecoration: 'none'}}><Logo>Codify</Logo></Link>
             <Nav>
-                <Link to="ranking/" style={{textDecoration: 'none', paddingLeft: '3rem'}}><NavTxt>Comandos</NavTxt></Link>
+                <Link to="comandos/" style={{textDecoration: 'none', paddingLeft: '3rem'}}><NavTxt>Comandos</NavTxt></Link>
                 <Link to="ranking/" style={{textDecoration: 'none', paddingLeft: '3rem'}}><NavTxt>Ranking</NavTxt></Link>
             </Nav>
         </HeaderStyled>
