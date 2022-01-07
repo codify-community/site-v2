@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import React, { useState, useEffect } from "react";
 
-
 const HeaderStyled = styled.div`
     position: fixed;
     top: 0;
@@ -18,8 +17,6 @@ const HeaderStyled = styled.div`
     transition: all 0.5s ease;
     z-index: 10;
 `
-    
-
 
 const Logo = styled.p`
     font-size: 2rem;
@@ -52,8 +49,6 @@ const NavTxt = styled.p`
         display: none;    
     }
 `
-
-
 
 const Header = () => {
     const [scrollPosition, setScrollPosition] = useState(0);

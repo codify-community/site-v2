@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import CountUp from 'react-countup';
 
-
 const InfoStyled = styled.div`
     display: flex;
     flex-direction: column;
@@ -28,7 +27,6 @@ const Desc = styled(Title)`
     font-size: 1.5rem;
     font-weight: normal;
 `
-
 
 const Info = (props) => {
     let content = []
