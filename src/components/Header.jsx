@@ -51,13 +51,13 @@ const NavTxt = styled.p`
 `
 
 const Header = () => {
-    const [scrollPosition, setScrollPosition] = useState(0);
+    //const [scrollPosition, setScrollPosition] = useState(0);
     const [HeaderMode, setHeaderMode] = useState('header');
     const handleScroll = () => {
         const position = window.pageYOffset;
-        setScrollPosition(position);
+        //setScrollPosition(position);
         if (position > 0){
-            setScrollPosition(position);    
+            //setScrollPosition(position);    
             setHeaderMode('header_on');
         }
         else{
