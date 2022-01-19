@@ -215,7 +215,7 @@ const Staffs = (props) => {
             <TitleCards>Staffs</TitleCards>
             <CardBox>
                 <Slider {...SliderSettings}  className='carousel'>
-                    {props.staffs}
+                    {props.staff}
                 </Slider >
             </CardBox>
         </CardsBox>
@@ -229,7 +229,7 @@ const Boosters = (props) => {
             <TitleCards>Boosters</TitleCards>
             <CardBox>
                 <Slider {...SliderSettings}  className='carousel'>
-                    {props.boosters}      
+                    {props.booster}      
                 </Slider >
             </CardBox>
         </CardsBox>
@@ -239,7 +239,7 @@ const Boosters = (props) => {
 const getData = async () => {
     try{
         const response = await axios.get('http://localhost:5000/api/home');
-    
+        
         const boosters = response.data.booster.map((booster, index)=>
             <Card key={index} pfp={booster.pfp} name={booster.name} ocupation={'➛ Ocupação'} desc={booster.bio} role={booster.role} habilities={booster.habilidades} link={booster.github} type={'github'}/>
         )
@@ -247,33 +247,34 @@ const getData = async () => {
         const staffs = response.data.staff.map((staff, index)=>
             <Card key={index} pfp={staff.pfp} name={staff.name} ocupation={'➛ Ocupação'} desc={staff.bio} role={staff.role} habilities={staff.habilidades} link={staff.github} type={'github'}/>
         )
-    
-        const info = response.data.info;
-    
-        return {staffs,boosters,info};
+        
+        let info = response.data.info
+        return {info, staffs, boosters};
     }catch(err){
-        throw new Error(err);
+        console.log('Erro ao carregar os dados, tente novamente mais tarde.' + err);
     }
 
 }
 
 const Main = () => {
-    const [data, setData] = useState({info:{},staffs:null, boosters:null});
+    const [data, setData] = useState({info:{'channel_count':0, 'member_count':0, 'staff_count':0},staff:null, booster:null});
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        getData()
-            .then(res => setData(res))
-            .catch(error=> console.error(error))
-    },[data])
-    
-    const {staffs,boosters,info} = data;
+    useEffect(async () => {
+        if(loading){
+            let res = await getData()
+            setData(res);
+            setLoading(false);
+        }
+    })
+    console.log(data);
 
     return (
         <MainBox>
             <Banner />
-            <Infos infos={info}/>
-            <Staffs staff={staffs}/>
-            <Boosters booster={boosters}/>
+            <Infos infos={data.info}/>
+            <Staffs staff={data.staffs}/>
+            <Boosters booster={data.boosters}/>
         </MainBox>  
     );
 }
