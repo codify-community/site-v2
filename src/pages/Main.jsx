@@ -277,7 +277,7 @@ const Main = () => {
                 console.log(err);
             }
         }
-    })
+    }, [loading])
     console.log(data);
 
     return (
