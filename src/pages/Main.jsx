@@ -266,16 +266,19 @@ const Main = () => {
     const [data, setData] = useState({info:{'channel_count':0, 'member_count':0, 'staff_count':0},staff:null, booster:null});
     const [loading, setLoading] = useState(true);
 
-    useEffect(async () => {
+    useEffect(() => {
         if(loading){
-            try{
-                const response = await getData();
-                setData(response);
-                setLoading(false);
-            }catch(err){
-                window.alert('Houve um erro ao carregar os dados, tente novamente mais tarde.');
-                console.log(err);
+            async function makeRequest(){
+                try{
+                    const response = await getData();
+                    setData(response);
+                    setLoading(false);
+                }catch(err){
+                    window.alert('Houve um erro ao carregar os dados, tente novamente mais tarde.');
+                    console.log(err);
+                }
             }
+            makeRequest()
         }
     }, [loading])
     console.log(data);
