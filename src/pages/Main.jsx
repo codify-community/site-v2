@@ -17,8 +17,6 @@ import Card from '../components/Card'
 //Secondary Highlight: #004BA8
 //Highlight 2: #A10220
 
-
-
 const MainBox = styled.div`
     display: flex;
     flex-direction: column;
@@ -26,6 +24,7 @@ const MainBox = styled.div`
     width: 100vw;
     background-color: #24272B;
 `
+
 const HomeStyled = styled.div`
 width: 100%;
 height: 100vh;
@@ -34,6 +33,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 `
+
 const Title = styled.h1`
 color: #f3f3f3;
 font-size: 5rem;
@@ -44,7 +44,9 @@ user-select: none;
 @media (min-width: 300px) and (max-width: 550px){
     font-size: 2rem;
 }
+
 `
+
 const Btn = styled.a`
 position: absolute;
 bottom: 20%;
@@ -70,6 +72,7 @@ transition: all 0.3s ease;
     padding: 10px 25px;
 }
 `
+
 //banner principal
 const Banner = () => {
     return(
@@ -81,7 +84,6 @@ const Banner = () => {
         </HomeStyled>
     )
 }
-
 
 const FollowBox = styled.div`
 position: absolute;
@@ -97,6 +99,7 @@ align-items: center;
     width: 130px;
 }
 `
+
 const FollowText = styled.p`
 color: #f3f3f3;
 font-size: 1.5rem;
@@ -104,6 +107,7 @@ font-size: 1.5rem;
     font-size: 1.1rem;
 }
 `
+
 const Icon = styled.a`
 width: 100%;
 height: 100%;
@@ -115,6 +119,7 @@ transition: all 0.3s ease;
     transform: rotate(-90deg);
 }
 `
+
 //frase e icons na esquerda
 const Follow = () => {
     return (
@@ -128,7 +133,6 @@ const Follow = () => {
     )
 }
 
-
 const InfosBox = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -139,6 +143,7 @@ const InfosBox = styled.div`
     height: auto;
     margin: 5% 0px;
 `
+
 //quadros com informações sobre o server (falta integrar com a api pra pegar os dados)
 const Infos = (props) => {
     return(
@@ -158,6 +163,7 @@ const CardsBox = styled.div`
     display: flex;
     flex-direction: column; 
 `
+
 const TitleCards = styled.h1`
     color: #f3f3f3;
     font-size: 6rem;
@@ -172,6 +178,7 @@ const TitleCards = styled.h1`
         margin-top: 15%;
     }
 `
+
 const CardBox = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -253,7 +260,6 @@ const getData = async () => {
     }catch(err){
         console.log('Erro ao carregar os dados, tente novamente mais tarde.' + err);
     }
-
 }
 
 const Main = () => {

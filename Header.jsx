@@ -46,12 +46,13 @@ const NavTxt = styled.p`
         transform: scale(1.1);
     }
     @media (max-width: 450px){
-        display: flex;    
+        display: none;    
     }
 `
 
 const Header = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
+    console.log("fuck u react 👍: ", scrollPosition)
     const [HeaderMode, setHeaderMode] = useState('header');
     const handleScroll = () => {
         const position = window.pageYOffset;
@@ -77,8 +78,8 @@ const Header = () => {
         <HeaderStyled className={HeaderMode}>
             <Link to="/" style={{textDecoration: 'none'}}><Logo>Codify</Logo></Link>
             <Nav>
-                <Link to="comandos/" style={{textDecoration: 'none', paddingLeft: '0rem'}}><NavTxt>Comandos</NavTxt></Link>
-                <Link to="ranking/" style={{textDecoration: 'none', paddingLeft: '1rem'}}><NavTxt>Ranking</NavTxt></Link>
+                <Link to="comandos/" style={{textDecoration: 'none', paddingLeft: '3rem'}}><NavTxt>Comandos</NavTxt></Link>
+                <Link to="ranking/" style={{textDecoration: 'none', paddingLeft: '3rem'}}><NavTxt>Ranking</NavTxt></Link>
             </Nav>
         </HeaderStyled>
     )

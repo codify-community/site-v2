@@ -23,8 +23,7 @@ body::-webkit-scrollbar-thumb {
     border: 3px solid #24272B;
     border-radius: 20px;
     height: 20px;
-    }
-
+}
 
 .typing_animation{
     color: #2176FF;
@@ -58,6 +57,7 @@ body::-webkit-scrollbar-thumb {
         font-size: 2rem;
     }
 }
+
 @media screen and (min-width: 300px) and (max-width: 550px){
     .typing_animation{
         font-size: 1.4rem;
