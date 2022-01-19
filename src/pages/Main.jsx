@@ -238,7 +238,7 @@ const Boosters = (props) => {
 
 const getData = async () => {
     try{
-        const response = await axios.get('http://localhost:5000/api/home');
+        const response = await axios.get('https://codify-site-api.herokuapp.com/api/home');
         
         const boosters = response.data.booster.map((booster, index)=>
             <Card key={index} pfp={booster.pfp} name={booster.name} ocupation={'➛ Ocupação'} desc={booster.bio} role={booster.role} habilities={booster.habilidades} link={booster.github} type={'github'}/>
@@ -262,9 +262,14 @@ const Main = () => {
 
     useEffect(async () => {
         if(loading){
-            let res = await getData()
-            setData(res);
-            setLoading(false);
+            try{
+                const response = await getData();
+                setData(response);
+                setLoading(false);
+            }catch(err){
+                window.alert('Houve um erro ao carregar os dados, tente novamente mais tarde.');
+                console.log(err);
+            }
         }
     })
     console.log(data);
