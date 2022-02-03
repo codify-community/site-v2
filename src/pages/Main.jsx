@@ -346,7 +346,7 @@ const Main = () => {
             .then((data) => setData(data))
             .catch((err) => {
                 console.error(err);
-                setError("Falha ao carregar as informações. Tente novamente!");
+                setError("Falha ao carregar as informações.Tente novamente!");
             });
 
         return () => {
