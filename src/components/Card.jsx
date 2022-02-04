@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { config } from "../config";
 
 const colors = {
-    OWNER: "#ffb83d",
-    ADMIN: "#fc3838",
-    MOD: "#617bff",
-    BOOSTER: "#F47FFF",
+    owner: "#ffb83d",
+    admin: "#fc3838",
+    mod: "#617bff",
+    booster: "#F47FFF",
 };
 
 const StaffStyled = styled.div`
@@ -53,6 +53,7 @@ const Tag = styled.div`
     color: #f3f3f3;
     font-size: 0.8rem;
     font-weight: bold;
+    text-transform: uppercase;
 `;
 
 const Pfp = styled.img`

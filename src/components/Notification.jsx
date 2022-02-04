@@ -67,6 +67,7 @@ const Notification = ({ text, type, onClose, ...props }) => {
         type: null,
     });
 
+    /*eslint-disable react-hooks/exhaustive-deps*/
     useEffect(() => {
         if (content.text) {
             notificationRef.current.classList.add("closing");

@@ -12,4 +12,14 @@ export const config = {
         success: "#05e338",
         transition: 800, //ms
     },
+    api: {
+        url: "https://codify-site-api.herokuapp.com",
+    },
+    cards: {
+        staffOrder: {
+            owner: 1,
+            admin: 2,
+            mod: 3,
+        },
+    },
 };

@@ -4,13 +4,13 @@ import TypeAnimation from "react-type-animation";
 import { AiOutlineGithub } from "react-icons/ai";
 import { SiDiscord } from "react-icons/si";
 import Slider from "react-slick";
-import axios from "axios";
 
 import Info from "../components/Info";
 import Card from "../components/Card";
 import Layout from "../components/Layout";
 import { config } from "../config";
 import Notification from "../components/Notification";
+import api from "../api/api";
 
 //color-pallete:
 //Primary: #24272B
@@ -259,27 +259,49 @@ const SliderSettings = {
 };
 
 //area da staff (falta integrar com a api pra pegar os dados)
-const Staffs = (props) => {
+const Staffs = ({ staffs }) => {
     //staff arguments: foto, nome, descrição, cargo(MOD/ADM), habiliades (linguagens e frameworks), link (github ou site), type (github ou site)
     return (
         <CardsBox>
             <TitleCards>Staffs</TitleCards>
             <CardBox>
                 <Slider {...SliderSettings} className="carousel">
-                    {props.staff}
+                    {staffs.map((staff, index) => (
+                        <Card
+                            key={index}
+                            pfp={staff.pfp}
+                            name={staff.name}
+                            ocupation={staff.ocupacao}
+                            desc={staff.bio}
+                            role={staff.role}
+                            habilities={staff.habilidades}
+                            link={staff.github}
+                        />
+                    ))}
                 </Slider>
             </CardBox>
         </CardsBox>
     );
 };
 
-const Boosters = (props) => {
+const Boosters = ({ boosters }) => {
     return (
         <CardsBox>
             <TitleCards>Boosters</TitleCards>
             <CardBox>
                 <Slider {...SliderSettings} className="carousel">
-                    {props.booster}
+                    {boosters.map((booster, index) => (
+                        <Card
+                            key={index}
+                            pfp={booster.pfp}
+                            name={booster.name}
+                            ocupation={booster.ocupacao}
+                            desc={booster.bio}
+                            role={booster.role}
+                            habilities={booster.habilidades}
+                            link={booster.github}
+                        />
+                    ))}
                 </Slider>
             </CardBox>
         </CardsBox>
@@ -288,39 +310,28 @@ const Boosters = (props) => {
 
 const getData = async () => {
     try {
-        const response = await axios.get(
-            "https://codify-site-api.herokuapp.com/api/home"
-        );
+        const response = await api.get("/api/home");
 
-        const boosters = response.data.booster.map((booster, index) => {
-            return (
-                <Card
-                    key={index}
-                    pfp={booster.pfp}
-                    name={booster.name}
-                    ocupation={booster.ocupacao}
-                    desc={booster.bio}
-                    role={booster.role}
-                    habilities={booster.habilidades}
-                    link={booster.github}
-                />
-            );
+        const boosters = response.data.booster.sort((a, b) => a.name - b.name);
+
+        const staffOrder = config.cards.staffOrder;
+
+        const staffs = response.data.staff.sort((a, b) => {
+            if (staffOrder[a.role] < staffOrder[b.role]) return -1;
+            if (staffOrder[a.role] > staffOrder[b.role]) return 1;
+
+            //Se os staffs tiverem a mesma role, ordenamos alfabeticamente:
+
+            const aName = a.name.toLowerCase();
+            const bName = b.name.toLowerCase();
+
+            if (aName < bName) return -1;
+            if (aName > bName) return 1;
+
+            return 0;
         });
 
-        const staffs = response.data.staff.map((staff, index) => (
-            <Card
-                key={index}
-                pfp={staff.pfp}
-                name={staff.name}
-                ocupation={staff.ocupacao}
-                desc={staff.bio}
-                role={staff.role}
-                habilities={staff.habilidades}
-                link={staff.github}
-            />
-        ));
-
-        let info = response.data.info;
+        const info = response.data.info;
         return { info, staffs, boosters };
     } catch (err) {
         console.log(err);
@@ -331,8 +342,8 @@ const getData = async () => {
 const Main = () => {
     const [data, setData] = useState({
         info: { channel_count: 0, member_count: 0, staff_count: 0 },
-        staff: [],
-        booster: [],
+        staffs: [],
+        boosters: [],
     });
 
     const [error, setError] = useState(null);
@@ -343,7 +354,9 @@ const Main = () => {
 
     useEffect(() => {
         getData()
-            .then((data) => setData(data))
+            .then((data) => {
+                setData(data);
+            })
             .catch((err) => {
                 console.error(err);
                 setError("Falha ao carregar as informações.Tente novamente!");
@@ -352,8 +365,8 @@ const Main = () => {
         return () => {
             setData({
                 info: { channel_count: 0, member_count: 0, staff_count: 0 },
-                staff: null,
-                booster: null,
+                staffs: [],
+                boosters: [],
             });
         };
     }, []);
@@ -363,8 +376,8 @@ const Main = () => {
             <MainBox>
                 <Banner />
                 <Infos infos={data.info} />
-                <Staffs staff={data.staffs} />
-                <Boosters booster={data.boosters} />
+                <Staffs staffs={data.staffs} />
+                <Boosters boosters={data.boosters} />
             </MainBox>
             {error && (
                 <Notification
