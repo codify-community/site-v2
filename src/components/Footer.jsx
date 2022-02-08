@@ -47,7 +47,7 @@ const Contact = ({ icon: Icon, children }) => {
 
 const ContactList = styled.ul`
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
 
     & li:last-child {

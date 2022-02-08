@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TypeAnimation from "react-type-animation";
 import { AiOutlineGithub } from "react-icons/ai";
 import { SiDiscord } from "react-icons/si";
+import { SiTelegram } from "react-icons/si"
 import Slider from "react-slick";
 
 import Info from "../components/Info";
@@ -64,6 +65,7 @@ const Btn = styled.a`
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    line-height: 10px;
     &:hover {
         background-color: ${config.colors.highlight};
         border: 2px solid transparent;
@@ -72,6 +74,10 @@ const Btn = styled.a`
         font-size: 1rem;
         padding: 10px 25px;
     }
+`;
+
+const IconDiscord = styled.div`
+    margin: 5px 10px;
 `;
 
 //banner principal
@@ -96,6 +102,9 @@ const Banner = () => {
             />
             <Follow />
             <Btn href="https://discord.gg/MSr8SJfR4H" target="_blank">
+            <IconDiscord>
+                <SiDiscord size={30} color="#f3f3f3" />
+            </IconDiscord>
                 Entre no Discord
             </Btn>
         </HomeStyled>
@@ -152,13 +161,14 @@ const Follow = () => {
                 }}
             >
                 <Icon
-                    href="https://github.com/codify-community"
-                    target="_blank"
-                >
+                    href="https://github.com/codify-community" target="_blank">
                     <AiOutlineGithub size={30} color="#f3f3f3" />
                 </Icon>
                 <Icon href="https://discord.gg/MSr8SJfR4H" target="_blank">
                     <SiDiscord size={30} color="#f3f3f3" />
+                </Icon>
+                <Icon href="https://t.me/codifycommunity" target="_blank">
+                    <SiTelegram size={30} color="#f3f3f3" />
                 </Icon>
             </div>
         </FollowBox>
